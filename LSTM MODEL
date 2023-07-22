@@ -1,0 +1,138 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import pandas_datareader as data 
+import yfinance as yf
+
+import yfinance as yf
+
+# Define the stock symbol and timeframe
+symbol = "TSLA"  # Apple
+start_date = "2010-01-01"
+end_date = "2019-12-31"
+
+# Fetch the historical stock data
+data = yf.download(symbol, start=start_date, end=end_date)
+
+# Print the retrieved data
+# print(data)
+data.head()
+# df = data.DataReader('AAPL' , 'yahoo' , start , end)
+# df.head()
+
+import yfinance as yf
+
+!pip install pandas-datareader
+data.tail()
+	             Open   	High	    Low	      Close	   Adj Close	Volume
+Date						
+2019-12-23	27.452000	28.134001	27.333332	27.948000	27.948000	199794000
+2019-12-24	27.890667	28.364668	27.512667	28.350000	28.350000	120820500
+2019-12-26	28.527332	28.898666	28.423332	28.729334	28.729334	159508500
+2019-12-27	29.000000	29.020666	28.407333	28.691999	28.691999	149185500
+2019-12-30	28.586000	28.600000	27.284000	27.646667	27.646667	188796000
+
+data = data.reset_index()
+# data.head()
+data.tail()
+data = data.drop(['Date','Adj Close'],axis=1)
+data.head()
+
+ma100=data.Close.rolling(100).mean()
+ma100
+plt.figure(figsize = (12,6))
+plt.plot(data.Close)
+plt.plot(ma100,'r')
+# splitting data into training and testing
+data_training = pd.DataFrame(data['Close'][0:int(len(data)*0.70)])
+data_testing = pd.DataFrame(data['Close'][int(len(data)*0.70):int(len(data))])
+print(data_training.shape)
+print(data_testing.shape)
+data_training.head()
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler(feature_range=(0,1))
+x_train = []
+y_train = []
+
+for i in range(100, data_training_array.shape[0]):    
+    x_train.append(data_training_array[i-100:i])
+    y_train.append(data_training_array[i,0])
+    
+x_train, y_train = np.array(x_train),np.array(y_train)
+
+from keras.layers import Dense,Dropout,LSTM
+from keras.models import Sequential
+
+!pip install tensorflow
+model = Sequential()
+model.add(LSTM(units = 50, activation ='relu',return_sequences=True,
+          input_shape=(x_train.shape[1],1)))
+model.add(Dropout(0.2))
+
+
+model.add(LSTM(units = 60, activation ='relu',return_sequences=True))
+model.add(Dropout(0.3))
+
+
+model.add(LSTM(units = 80, activation ='relu',return_sequences=True))
+model.add(Dropout(0.4))
+
+
+model.add(LSTM(units = 120, activation ='relu'))
+model.add(Dropout(0.5))
+
+
+model.add(Dense(units =1))
+
+model.compile(optimizer='adam',loss='mean_squared_error')
+model.fit(x_train, y_train, epochs=50)
+model.save('keras_model.h5')
+
+data_testing.head()
+
+# final_data= past_100_days.pandas.concat(data_testing,ignore_index=True)
+import pandas as pd
+
+final_data = pd.concat([past_100_days, data_testing], ignore_index=True)
+# final_data= past_100_days.pandas.concat(data_testing,ignore_index=True)
+import pandas as pd
+
+final_data = pd.concat([past_100_days, data_testing], ignore_index=True)
+
+
+x_test=[]
+y_test=[]
+
+for i in range(100,input_data.shape[0]):
+    x_test.append(input_data[i-100:i])
+    y_test.append(input_data[i,0])
+
+x_test,y_test=np.array(x_test) , np.array(y_test)
+print(x_test.shape)
+print(y_test.shape)
+
+scale_factor = 1/0.02123255
+y_predicted = y_predicted * scale_factor
+y_test = y_test * scale_factor
+
+plt.figure(figsize=(12,6))
+plt.plot(y_test,'b',label='Original Price')
+plt.plot(y_predicted,'r',label='Predicted Price')
+plt.xlabel('Time')
+plt.ylabel('Price')
+plt.legend()
+plt.show()
+
+
+from sklearn.preprocessing import MinMaxScaler
+
+
+
+
+
+
+
+
+
+
